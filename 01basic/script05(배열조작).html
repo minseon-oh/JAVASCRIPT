@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = ['a','b','c','d','e'];
+        var arr = new Array('a','b','c','d','e');
+
+        console.log(arr);
+        
+        //push() -배열 마지막에 값 추가
+        arr.push(100);
+        console.log(arr);
+
+        //pop() -배열 마지막 값 삭제
+        arr.pop();
+        console.log(arr);
+
+        //unshift() -배열의 맨 앞에 요소 추가
+        arr.unshift(100);
+        console.log(arr);
+
+        //shift() -배열의 맨 앞 요소 삭제
+        arr.shift();
+        console.log(arr);
+
+        //splice() -배열의 중간에 제거, 추가
+        arr.splice(1,1); //1번째 인덱스에서 1개삭제
+        console.log(arr);
+        arr.splice(1,2); //1번째 인덱스에서 2개삭제
+        console.log(arr);
+        arr.splice(1,0,"park","kim"); //1번째 인덱스에서 0개삭제하고 그 뒤에 값 추가
+        console.log(arr);
+
+        //indexOf() -배열안의 값 검색
+        console.log("park이 있는 위치: " + arr.indexOf("park"));
+
+        //sort() -오름차순정렬
+        arr.sort();
+        console.log(arr);
+
+        //reverse() -거꾸로 (내림차순정렬)
+        arr.reverse();
+        console.log(arr);
+
+    </script>
+</body>
+</html>
