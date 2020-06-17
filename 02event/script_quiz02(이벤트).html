@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        window.onload = function(){
+            var ok1 = document.getElementById("ok1");
+            var ok2 = document.getElementById("ok2");
+            ok1.addEventListener("click", page1);
+            ok2.addEventListener("click", page2);
+            function page1(){
+                if(confirm("네이버로 이동하시겠습니까?")){
+                    location.href="https://www.naver.com"
+                }
+            }
+            function page2(){
+                if(confirm("구글로 이동하시겠습니까?")){
+                    location.href="https://www.google.com"
+                }
+            }
+        }
+
+    </script>
+
+    <!-- 페이지이동은 location.href = "경로" -->
+    <button type="button" id="ok1" onclick="page(this)">네이버로 이동</button>
+    <button type="button" id="ok2" onclick="page(this)">구글로 이동</button>
+
+<!-- 
+    <script>
+        function page(a) {
+            if (confirm("페이지 이동을 하시겠습니까?")) {
+                if (a.id == "ok1") {
+                    location.href = "https://www.naver.com"
+                } else if (a.id == "ok2") {
+                    location.href = "https://www.google.com"
+                }
+            }
+        }
+    </script> 
+-->
+
+</body>
+</html>

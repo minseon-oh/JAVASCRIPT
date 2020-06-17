@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //자바스크립트 객체는 {}중괄호로 표기하고, 키와 값을 쌍으로 지니는 형태이다.
+        //1. 자바스크립트 객체는 .점을 찍어서 접근한다.
+        //2. 객체명["키"]로 접근한다.
+        var person = {name:"홍길동", age:20, arr:[1,2,3]};
+        console.log(person);
+        console.log(person.name); //1번방법
+        console.log(person["age"]); //2번방법
+        console.log(person.arr[1]);
+        console.log(person["arr"][1]);
+
+        //객체안에 객체
+        var exam = {kor:90, eng:80, math:70};
+        var kim = {name:"홍길동", exam:exam};
+        console.log(kim);
+        console.log(kim.exam);
+        console.log(kim.exam.kor);
+        console.log(kim["exam"]["math"]);
+
+        //배열안에 객체(많이 사용되는 형태) 배열은 [대괄호], 객체는 {중괄호}
+        var arr = [
+            {id:1, title:"hi", content:"ㅋㅋ"},
+            {id:2, title:"hello", content:"ㅎㅎ"},
+            {id:3, title:"bye", content:"ㄱㄱ"}
+        ]
+        console.log(arr[2].title);
+
+        //객체와 반복문
+        for(var i=0; i<arr.length; i++){
+            console.log("아이디: " + arr[i].id);
+            console.log("제목: " + arr[i].title);
+            console.log("내용: " + arr[i].content);
+        }
+
+        console.log("--------");
+
+        var arr2 = [
+            {name:"홍길동", age:20, subject:["자바","JSP","SPRING"], birth:20200101},
+            {name:"이순신", age:30, subject:["CSS","SCRIPT"], birth:20200202}
+        ]
+
+        console.log(arr2);
+
+        for(var i in arr2){
+            for(var j in arr2[i].subject){
+                console.log(arr2[i].subject[j]);
+            }
+        }
+
+    </script>
+</body>
+</html>

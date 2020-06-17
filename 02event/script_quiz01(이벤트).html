@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 1. 다음 라디오버튼을 클릭했을 때 동의했습니다 경고창을 띄우고 값출력 -->
+    <input type="checkbox" value="1" onclick="check(this)">조항1
+    <input type="checkbox" value="2" onclick="check(this)">조항2
+    <input type="checkbox" value="3" onclick="check(this)">조항3
+    <input type="checkbox" value="4" onclick="check(this)">조항4
+    <input type="checkbox" value="5" onclick="check(this)">조항5
+
+    <hr>
+    <!-- 2. 버튼을 클릭했을 때 인풋태그의 공백여부, 기억하기의 체크여부를 확인 -->
+    ID:<input type="text" id="id"><br>
+    기억하기:<input type="checkbox" id="remember">
+    <button type="button" id="check2" onclick="check2()">확인</button>
+
+    <script>
+        var id = document.getElementById("id");
+        var remember = document.getElementById("remember");
+
+        function check(a){
+            if(a.checked){
+                alert(a.value + "조항에 동의하였습니다");
+            }
+        }
+
+        function check2(){
+            if(id.value == ''){
+                alert("아이디를 입력하세요");
+            }
+            if(remember.checked){
+                console.log("아이디 기억하기가 체크되었습니다");
+            }else{
+                console.log("아이디 기억하기가 체크되지않았습니다");
+            }
+        }
+    </script>
+</body>
+</html>

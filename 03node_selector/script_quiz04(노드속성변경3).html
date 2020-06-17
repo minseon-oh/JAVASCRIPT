@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {text-align: center;}
+        .center{
+            overflow: hidden;
+            margin: 0 auto; 
+            width: 500px; 
+            border: 1px solid rgb(116, 116, 116);
+            padding: 10px;
+        }
+        .center .imge{
+            float: left; 
+            box-sizing: border-box; 
+            width: 50%;
+            padding-right: 10px;
+        }
+        .center .imge img{
+            float: left; 
+            border: 1px solid rgb(116, 116, 116); 
+            box-sizing: border-box; 
+        }
+        .center .box {
+            float: right; 
+            box-sizing: border-box;
+            width: 50%;
+            padding-left: 10px;
+        }
+        .center .box .content{
+            float: left; 
+            border: 1px solid rgb(116, 116, 116); 
+            box-sizing: border-box;
+            height: 250px;
+            text-align: left;
+        }
+    </style>
+
+</head>
+<body>
+    <header>
+        <h2>야간모드</h2>
+        <button type="button" id="a">어둡게</button>
+        <button type="button" id="b">밝게</button>
+        <hr>
+    </header>
+    <section>
+        <div class="center">
+            <div class="imge">
+                <img src="profile.png" width="250px">
+            </div>
+            <div class="box">
+                <div class="content">
+                    자바스크립트는 객체 기반의 스크립트 프로그래밍 언어이다.
+                    이 언어는 웹 브라우저 내에서 주로 사용하며, 다른 응용 프로그램의 내장 객체에도 접근할 수 있는 기능을 가지고 있다. 
+                    또한 Node.js와 같은 런타임 환경과 같이 서버 사이드 네트워크 프로그래밍에도 사용되고 있다. 
+                    <br>
+                    <br>
+                    위키백과
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        var a = document.getElementById("a");
+        var b = document.getElementById("b");
+        a.onclick = function(){
+            document.body.style.backgroundColor = "black";
+            document.body.style.color = "white";
+        }
+        b.onclick = function(){
+            document.body.style.backgroundColor = "white";
+            document.body.style.color = "black";
+        }
+    </script>
+</body>
+</html>
