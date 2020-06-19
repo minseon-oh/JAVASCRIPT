@@ -70,7 +70,7 @@
         var btn3 = document.getElementById("btn3");
         btn3.onclick = function(){
             //select1의 자식태그만 선택
-            var select1 = document.getElementById("select1");
+            var select1 = document.getElementsByTagName("select1");
             var option = select1.getElementsByTagName("option");
 
             for(var i=0; i<option.length; i++){

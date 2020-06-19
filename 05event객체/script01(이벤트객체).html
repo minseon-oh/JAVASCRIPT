@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li class="list">1. 홍길동</li>
+        <li class="list">2. 김길동</li>
+        <li class="list">3. 고길동</li>
+        <li class="list">4. 박길동</li>
+        <li class="list">5. 공길동</li>
+    </ul>
+
+    선택된 태그의 값
+    <p class="result"></p>
+
+    <script>
+        //이벤트가 발생했을 때 실행되는 함수의 arguments에 event객체를 자동으로 넣어준다
+        //하지만 li가 1000개 라면? 함수가 1000개 생성된다는 뜻이기때문에 좋은 코드는 아니다.
+        var list = document.querySelectorAll(".list");
+        var result = document.querySelector(".result");
+        for(var i=0; i<list.length; i++){
+            list[i].onclick = function(){
+                // console.log(event);
+                // console.log(event.target);
+                // event.target.style.color = "red";
+                result.innerHTML = event.target.innerHTML;
+            }
+        }
+    </script>
+
+</body>
+</html>

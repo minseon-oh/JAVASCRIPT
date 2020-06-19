@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h2>할일 목록 만들기</h2>
+        <p class="p1">
+            <div class="p1-div">
+            <input type="text" placeholder="닉네임을 적으세요" id="nickName">
+            <button type="button" onclick="nick()" id="ok">확인</button>
+            </div>
+        </p>
+        <p class="p2">
+            <input type="text" placeholder="당신의 할 일을 적으세요" id="plan">
+            <button type="button" id="add">확인</button>
+        </p>
+        <ul class="list">
+
+        </ul>
+    </div>
+
+    <script>
+        var list = document.querySelector(".list");
+        var add = document.getElementById("add");
+        function nick(){
+            var nickName = document.getElementById("nickName");
+            var p1 = document.querySelector(".p1");
+            var p1_div = document.querySelector(".p1-div");
+            var ok = document.getElementById("ok");
+            var h2 = document.createElement("h2");
+            var text = document.createTextNode(nickName.value + "님 안녕하세요");
+
+            p1_div.style.display = "none";
+
+            h2.appendChild(text);
+            p1.appendChild(h2);
+        }
+
+        add.onclick = function(){
+            var plan = document.getElementById("plan");
+            var li = document.createElement("li");
+            var content = document.createTextNode(plan.value + " ");
+            
+            //삭제버튼이벤트
+            var btn1 = document.createElement("button");
+            btn1.innerHTML = "X";
+            btn1.addEventListener("click", deleteTodo);
+
+            //이동버튼
+            var btn2 = document.createElement("button");
+            var btn3 = document.createElement("button");
+            btn2.innerHTML = "↑";
+            btn3.innerHTML = "↓";
+            btn2.addEventListener("click", todoUp);
+            btn3.addEventListener("click", todoDown);
+
+            li.appendChild(content);
+            li.appendChild(btn1);
+            li.appendChild(btn2);
+            li.appendChild(btn3);
+            list.appendChild(li);
+            plan.value = "";
+
+        }
+
+        //삭제함수
+        function deleteTodo(){
+            // list.removeChild(this.parentElement);
+            list.removeChild(event.target.parentElement);
+        }
+
+        //이동함수
+        function todoUp(){
+            var current = event.target.parentElement;
+            var previous = current.previousElementSibling;
+            if(previous === null){
+                alert("이전 행이 없습니당ㅡㅡ");
+                return;
+            }
+            list.insertBefore(current, previous);
+        }
+        function todoDown(){
+            var current = event.target.parentElement;
+            var next = current.nextElementSibling;
+            if(next === null){
+                alert("다음 행이 없습니당ㅡㅡ");
+                return;
+            }
+            list.insertBefore(next, current);
+        }
+    </script>
+</body>
+</html>
