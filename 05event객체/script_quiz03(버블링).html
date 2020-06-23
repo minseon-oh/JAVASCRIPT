@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        ul, li {list-style: none; display: inline-block;}
+    </style>
+
+</head>
+<body>
+    <h3>다중버블링</h3>
+    <div class="list">
+        <ul>
+            <li><img src="img/1.jpg" alt="1" width="100"></li>
+            <li><img src="img/2.jpg" alt="2" width="100"></li>
+            <li><img src="img/3.jpg" alt="3" width="100"></li>
+            <li><img src="img/4.jpg" alt="4" width="100"></li>
+        </ul>
+    </div>
+    결과
+    <div class="result">
+        <img src="img/1.jpg" alt="결과" width="300">
+    </div>
+
+    <hr>
+
+    <table>
+        <thead>
+            <th>번호</th>
+            <th>제목</th>
+            <th>내용</th>
+            <th>삭제</th>
+        </thead>
+        <tbody class="content">
+            <tr>
+                <td>1</td>
+                <td>첫글</td>
+                <td>ㅋㅋ</td>
+                <td><button type="button" id="del">삭제</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>첫글</td>
+                <td>ㅋㅋ</td>
+                <td><button type="button" id="del">삭제</button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>첫글</td>
+                <td>ㅋㅋ</td>
+                <td><button type="button" id="del">삭제</button></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>첫글</td>
+                <td>ㅋㅋ</td>
+                <td><button type="button" id="del">삭제</button></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>첫글</td>
+                <td>ㅋㅋ</td>
+                <td><button type="button" id="del">삭제</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        var list = document.querySelector(".list");
+        var result = document.querySelector(".result img");
+        var content = document.querySelector(".content");
+        
+        list.onclick = function(){
+            if(event.target.tagName !== "IMG"){
+                return;
+            }else{
+                result.src = event.target.src;
+            }
+        }
+
+        content.onclick = function(){
+            console.log(event.target);
+            if(event.target.id !== "del"){
+                return;
+            }else{
+                event.target.parentElement.parentElement.remove();
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        ul li {list-style: none; display: inline-block; border: 1px solid #333; padding: 15px 20px; cursor: pointer; width: 25%;}
+
+        .toggle-menu {display: none;}
+        .active {display: block; animation: fadeIn .5s linear;}
+        @keyframes fadeIn{
+            form{
+                opacity: 0;
+                color: #333;
+            }to{
+                opacity: 1;
+                color: red;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h3>토글탭</h3>
+    <section>
+        <ul class="toggle">
+            <li data-id="#toggle1">메뉴1</li>
+            <li data-id="#toggle2">메뉴2</li>
+            <li data-id="#toggle3">메뉴3</li>
+        </ul>
+        <div class="toggle-menu active" id="toggle1">
+            토글메뉴1
+        </div>
+        <div class="toggle-menu" id="toggle2">
+            토글메뉴2
+        </div>
+        <div class="toggle-menu" id="toggle3">
+            토글메뉴3
+        </div>
+    </section>
+    <script>
+        /* 
+            1.ul에 이벤트 버블링을 이용해서 클릭이벤트를 걸고 클릭되는 타겟의 data-id를 얻는다
+            2.toggle-menu의 active속성을 삭제
+            3.data-id의 값에 알맞는 태그에 active속성을 추가한다
+        */
+
+/*     민선풀이
+       var menuList = document.querySelector(".menuList");
+       var menu = document.querySelectorAll(".toggle-menu");
+
+       menuList.onclick = function(){
+           var id = event.target.dataset.id;
+           var menuId = document.querySelector(id);
+           console.log(menuId);
+
+           for(var i=0; i<menu.length; i++){
+               if(menu[i].classList.contains("active")){
+                   menu[i].classList.remove("active");
+                }else if(menu[i].id == menuId.id){
+                    menu[i].classList.add("active");
+                }
+           }
+
+       } 
+*/
+
+       /* 쌤풀이 */
+       var toggle = document.querySelector(".toggle");
+       var toggleList = document.querySelectorAll(".toggle-menu");
+       toggle.onclick = function(){
+           if(event.target.tagName !== "LI") return;
+
+            //active 속성을 삭제
+            for(var i=0; i<toggleList.length; i++){
+                if(toggleList[i].classList.contains("active")){ //active를 포함한다면
+                    toggleList[i].classList.remove("active");
+                }
+            }
+
+           var target = event.target.dataset.id;
+           document.querySelector(target).classList.add("active");
+
+
+       }
+
+
+    </script>
+</body>
+</html>
