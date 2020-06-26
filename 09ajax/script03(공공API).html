@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h3>현재 위치에서의 1KM반경 내 공적마스크 판매약국</h3>
+    </div>
+    <div class="storesList">
+        <div class="store">
+            
+        </div>
+    </div>
+
+    <script>
+
+        //위도경도구하기
+        navigator.geolocation.getCurrentPosition(function(position){
+        }),function(){
+            alert("실패");
+        }
+
+        //좌표성공함수
+        function ajax(position){
+            var lat = position.coords.latitude; //위도
+            var lng = position.coords.longitude; //경도
+        fetch(`https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=${lat}&lng=${lng}&m=1000`).then(function (response) {
+
+            if (response.status !== 200) {
+                alert("서버와의 통신에 실패");
+                return;
+            } else {
+                return response.json();
+            }
+
+        }).then(function (jsonData) {
+            var list = jsonData.stores;
+            var storesList = document.querySelector(".storesList");
+            var store = document.querySelector(".store");
+            console.log(list);
+
+            for(var i=0; i<list.length; i++){
+                var addr = list[i].addr; //주소
+                var stock_at = list[i].stock_at; //입고시간
+                var remain_stat;//재고상태
+                var code = list[i].code; //식별코드
+
+                if(list[i].remain_stat == "plenty"){
+                    remain_stat = "100개 이상";
+                }else if(list[i].remain_stat == "some"){
+                    remain_stat = "30개 이상 100개 미만";
+                }else if(list[i].remain_stat == "few"){
+                    remain_stat = "2개 이상 30개 미만";
+                }else if(list[i].remain_stat == "empty"){
+                    remain_stat = "1개 이하";
+                }else{
+                    remain_stat = "판매중지";
+                }
+                
+                var ul = document.createElement("ul");
+                var li = document.createElement("li");
+                
+                li.append("식별코드: " + code);
+                li.append(" /주소: " + addr);
+                li.append(" /입고시간: " + stock_at);
+                li.append(" /재고상태: " + remain_stat);
+                ul.appendChild(li);
+                store.appendChild(ul);
+            }
+
+        })
+        }
+
+        //좌표실패함수
+        function coorFail(){
+
+        }
+
+        //즉시실행함수
+        (function(){
+            navigator.geolocation.getCurrentPosition(ajax, coorFail);
+        })();
+    </script>
+</body>
+</html>

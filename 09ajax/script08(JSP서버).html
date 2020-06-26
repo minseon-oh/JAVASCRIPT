@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<button type="button" onclick="ajax()">ajax요청</button>
+	
+	<script>
+	
+		function ajax() {
+			
+			fetch("http://localhost:8181/ajax/test.ajax").then(function(response){
+				console.log(response);
+			})
+			
+		}
+	
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            width: 50%;
+            height: 50%;
+            margin: 0 auto;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+      </style>
+</head>
+<body>
+    <h2 align="center">코로나 19 마스크 판매현황</h2>
+    <div id="map"></div>
+    <script>
+        var map;
+        var lat;
+        var lng;
+
+
+        //위치정보의 성공함수
+        function ajax(position){
+            lat = position.coords.latitude;
+            lng = position.coords.longitude;
+
+            fetch(`https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat=${lat}&lng=${lng}&m=1000`).then(function (response) {
+
+                if (response.status !== 200) {
+                    alert("서버와의 통신에 실패");
+                    return;
+                } else {
+                    return response.json();
+                }
+
+            }).then(function (jsonData) {
+                //지도에 맵을 생성하는 코드
+                map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 2,
+                    center: new google.maps.LatLng(lat, lng)
+                });
+
+                var script = document.createElement('script');
+                script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
+                document.getElementsByTagName('head')[0].appendChild(script);
+
+                //마커를 루프로 돌려서 화면에 찍어주는 코드
+                //지도에 좌표를 찍어주는 코드
+                window.eqfeed_callback = function (results) {
+                    var data = jsonData.stores;
+                    for (var i = 0; i < data.length; i++) {
+                        var latLng = new google.maps.LatLng(data[i].lat, data[i].lng);
+                        var market = new google.maps.Marker({
+                            position: latLng,
+                            map: map,
+                            title: data[i].addr + "/n" + data[i].name + "/n재고: " + 
+                                (function(){
+                                    if(data[i].remain_stat === "plenty"){
+                                        return "100개이상"
+                                    }else if(data[i].remain_stat === "some"){
+                                        return "30~100개"
+                                    }else if(data[i].remain_stat === "few"){
+                                        return "30개 미만"
+                                    }else{
+                                        return "판매중지"
+                                    }
+                                })()
+
+                        });
+                    }
+                }
+            })
+
+        }
+
+        //위치정보의 실패함수
+        function coordFail(){
+
+        }
+        
+        //지도 API시작
+        function initMap() {
+            navigator.geolocation.getCurrentPosition(ajax, coordFail);
+        }
+
+    </script>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqP4OIGgQMIcki5eCPBLT9ToYaOdKZ3V4&callback=initMap">
+    </script>
+
+</body>
+</html>
